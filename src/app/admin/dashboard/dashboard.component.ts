@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from 'src/app/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,10 @@ export class DashboardComponent implements OnInit{
   TeamMembersSummary:any = [];
   TeamMembers:any = [];
 
+  constructor(private daashBoardService : DashboardService){
+
+  }
+
   ngOnInit(): void {
     this.Designation='Team Lead';
     this.Username= 'rahul.a.s.kumar';
@@ -36,28 +41,7 @@ export class DashboardComponent implements OnInit{
     this.Clients = ['TCS', 'Infosys Pvt Ltd' , 'Accenture Solution Pvt Ltd' , 'Wipro'];
     this.Projects = ['Project A','Project B', 'Project C', 'Project D'];
     this.Years = [2019,2020,2021,2022,2023];
-    this.TeamMembersSummary = [
-      {
-        region: 'East',
-        teamMemberCount: 10,
-        currentlyUnavailableMembers: 5
-      },
-      {
-        region: 'West',
-        teamMemberCount: 19,
-        currentlyUnavailableMembers: 9
-      },
-      {
-        region: 'North',
-        teamMemberCount: 14,
-        currentlyUnavailableMembers: 6
-      },
-      {
-        region: 'South',
-        teamMemberCount: 15,
-        currentlyUnavailableMembers: 3
-      }
-    ]
+    this.TeamMembersSummary = this.daashBoardService.getTeamMembersSummary();
     this.TeamMembers = [
       {
         region: 'East',
