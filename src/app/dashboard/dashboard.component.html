@@ -41,10 +41,13 @@
             <div class="col-12 text-center pt-2 pb-2" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">CLIENTS</div>
             <div class="col-12">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Inofsys</li>
+                    <li *ngFor="let client of Clients" class="list-group-item">
+                        {{client}}
+                    </li>
+                    <!-- <li class="list-group-item">Inofsys</li>
                     <li class="list-group-item">TCS</li>
                     <li class="list-group-item">Accenture</li>
-                    <li class="list-group-item">Wipro</li>
+                    <li class="list-group-item">Wipro</li> -->
                 </ul>
             </div>
         </div>
@@ -57,10 +60,11 @@
                          <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">Project A</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Project A</a>
+                                <a class="dropdown-item" href="#" *ngFor="let project of Projects">{{project}}</a>
+                                <!-- <a class="dropdown-item" href="#">Project A</a>
                                 <a class="dropdown-item" href="#">Project B</a>
                                 <a class="dropdown-item" href="#">Project C</a>
-                                <a class="dropdown-item" href="#">Project D</a>
+                                <a class="dropdown-item" href="#">Project D</a> -->
                             </div>
                          </div>   
                     </div>
@@ -68,10 +72,11 @@
                         <div class="dropdown">
                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">2019</button>
                            <div class="dropdown-menu">
-                               <a class="dropdown-item" href="#">2019</a>
+                                <a class="dropdown-item" href="#" *ngFor="let year of Years">{{year}}</a>
+                               <!-- <a class="dropdown-item" href="#">2019</a>
                                <a class="dropdown-item" href="#">2020</a>
                                <a class="dropdown-item" href="#">2021</a>
-                               <a class="dropdown-item" href="#">2022</a>
+                               <a class="dropdown-item" href="#">2022</a> -->
                            </div>
                         </div>   
                    </div>
@@ -107,12 +112,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row"><b>East</b></td>
-                            <td>20</td>
-                            <td>5</td>
+                        <tr *ngFor="let member of TeamMembersSummary">
+                            <td scope="row"><b>{{member.region}}</b></td>
+                            <td>{{member.teamMemberCount}}</td>
+                            <td>{{member.currentlyUnavailableMembers}}</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td scope="row"><b>West</b></td>
                             <td >90</td>
                             <td>50</td>
@@ -126,7 +131,7 @@
                             <td scope="row"><b>South</b></td>
                             <td>23</td>
                             <td>15</td>
-                        </tr>  
+                        </tr>   -->
                     </tbody>                  
                 </table>
             </div>
@@ -138,7 +143,35 @@
             TEAM MEMBERS</div>
             <div class="col-lg-12 pt-2">
                 <div class="accordion" id="accordion1">
-                    <div class="card">
+                    <div class="card" *ngFor="let member of TeamMembers; index as i">
+                        <div class="card-header bg-secondary" [id]="'card'+i">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link text-white" type="button" 
+                                data-bs-toggle="collapse" [attr.data-bs-target]="'#cardbody'+i">{{member.region}}</button>
+                            </h2>
+                        </div>
+                        <div [id]="'cardbody'+i" class="collapse" data-bs-parent="#accordion1">
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let memberDetails of member.details;">
+                                            <td>{{memberDetails.id}}</td>
+                                            <td>{{memberDetails.name}}</td>
+                                            <td><i class="{{memberDetails.className}}"></i>{{memberDetails.Status}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="card">
                         <div class="card-header bg-secondary" id="card1">
                             <h2 class="mb-0">
                                 <button class="btn btn-link text-white" type="button" 
@@ -309,7 +342,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
