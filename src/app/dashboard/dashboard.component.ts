@@ -177,5 +177,28 @@ export class DashboardComponent implements OnInit{
       }
     ]
   }
+
+  onProjectChange(event:any) {
+    if(event.target.innerHTML == 'Project A'){
+      this.ProjectCost=120;
+      this.CurrentExpenditure=100;
+      this.AvailableFunds=20;
+    }
+    else if(event.target.innerHTML == 'Project B'){
+      this.ProjectCost=1200;
+      this.CurrentExpenditure=1000;
+      this.AvailableFunds=200;
+    }
+    else if(event.target.innerHTML == 'Project C'){
+      this.ProjectCost=12000;
+      this.CurrentExpenditure=10000;
+      this.AvailableFunds=2000;
+    }
+    else if(event.target.innerHTML == 'Project D'){
+      this.ProjectCost=120000;
+      this.CurrentExpenditure=100000;
+      this.AvailableFunds=20000;
+    }
+  }
   
 }

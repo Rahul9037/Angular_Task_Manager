@@ -9,7 +9,7 @@
     <div class="col-lg-3 pb-3" style="background-color: #e9e6e6;">
         <div class="row">
             <div class="col-11 text-white text-center mx-auto rounded pt-2 pb-2 font-weight-bold" style="background-color: #a39e9e; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" >
-            {{Designation}}
+            {{Designation | uppercase}}
             </div>
             <div class="col-12 text-center mt-2">
                 <img src="assets/user.png" width="120"/>
@@ -60,7 +60,7 @@
                          <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">Project A</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" *ngFor="let project of Projects">{{project}}</a>
+                                <a class="dropdown-item" onclick="return false;" (click)="onProjectChange($event)" *ngFor="let project of Projects">{{project}}</a>
                                 <!-- <a class="dropdown-item" href="#">Project A</a>
                                 <a class="dropdown-item" href="#">Project B</a>
                                 <a class="dropdown-item" href="#">Project C</a>
@@ -150,7 +150,7 @@
                                 data-bs-toggle="collapse" [attr.data-bs-target]="'#cardbody'+i">{{member.region}}</button>
                             </h2>
                         </div>
-                        <div [id]="'cardbody'+i" class="collapse" data-bs-parent="#accordion1">
+                        <div [id]="'cardbody'+i" class="collapse" [ngClass]="i === 0 ? 'show' : ''" data-bs-parent="#accordion1">
                             <div class="card-body">
                                 <table class="table">
                                     <thead>
@@ -163,8 +163,8 @@
                                     <tbody>
                                         <tr *ngFor="let memberDetails of member.details;">
                                             <td>{{memberDetails.id}}</td>
-                                            <td>{{memberDetails.name}}</td>
-                                            <td><i class="{{memberDetails.className}}"></i>{{memberDetails.Status}}</td>
+                                            <td [style.color]="memberDetails.Status === 'Busy' ? 'red' : ''">{{memberDetails.name}}</td>
+                                            <td ><i class="{{memberDetails.className}}"></i>{{memberDetails.Status}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
