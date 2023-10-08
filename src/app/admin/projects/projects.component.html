@@ -1,0 +1,208 @@
+<h5>Prjocts</h5>
+<div class="row">
+    <div class="col-8 mx-auto">
+        <form>
+            <div class="row mb-3">
+                <label for="searchBy" class="col-sm-3 col-form-label">Search By</label>
+                <div class="col-sm-9">
+                    <select id="searchBy" class="form-select form-select-sm" aria-label=".form-select-sm example" name="searchBy" [(ngModel)]="searchBy">
+                        <option value="{{prop}}" *ngFor="let prop of searchByItems">{{prop}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="searchText" class="col-sm-3 col-form-label">Searc Text</label>
+                <div class="col-sm-9">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="search text" aria-label="searchText" aria-describedby="button-addon2" id="searchText" name="searchText" [(ngModel)]="searchText">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="onSearchClick()"><i class="fa fa-search"></i></button>
+                      </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-8 mx-auto">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+            Add Project
+        </button>
+    </div>
+    <div class="col-8 mx-auto">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Poject ID</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Date Of Start</th>
+                    <th scope="col">Team Size</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let project of projects; let i = index;">
+                    <td>{{project.projectID}}</td>
+                    <td>{{project.projectName}}</td>
+                    <td>{{project.dateOfStart}}</td>
+                    <td>{{project.teamSize}}</td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-between"> 
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editProjectModal" aria-label="Edit" (click)="onEditClick(project,i)">Edit</button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProjectModal" aria-label="Edit" (click)="onDeleteClick($event,i)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>
+
+<form>
+    <div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="newProjectModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">New Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="projectID" class="col-sm-3 col-form-label">Project ID</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="projectID" name="projectID" [(ngModel)]="newProject.projectID">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="projectName" class="col-sm-3 col-form-label">Project Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="newProject.projectName">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="dateOfStart" class="col-sm-3 col-form-label">Date Of Start</label>
+                        <div class="col-sm-9">
+                          <input type="date" class="form-control" id="dateOfStart" name="dateOfStart" [(ngModel)]="newProject.dateOfStart">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="teamSize" class="col-sm-3 col-form-label">Team Size</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="teamSize" name="teamSize" [(ngModel)]="newProject.teamSize">
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="projectID">Project ID</label>
+                        <input type="number" class="form-control" id="projectID" placeholder="Project ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectName">Project Name</label>
+                        <input type="text" class="form-control" id="projectName" placeholder="Project Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfStart">Date Of Start</label>
+                        <input type="date" class="form-control" id="dateOfStart" placeholder="Date of Start">
+                    </div>
+                    <div class="form-group">
+                        <label for="teamSize">Team Size</label>
+                        <input type="number" class="form-control" id="teamSize" placeholder="Team Size">
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSaveClick()">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form>
+    <div class="modal fade" id="editProjectModal" tabindex="-1" role="dialog" aria-labelledby="editProjectModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Edit Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <label for="projectID" class="col-sm-3 col-form-label">Project ID</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="projectID" name="projectID" [(ngModel)]="editProject.projectID" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="projectName" class="col-sm-3 col-form-label">Project Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="editProject.projectName">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="dateOfStart" class="col-sm-3 col-form-label">Date Of Start</label>
+                        <div class="col-sm-9">
+                          <input type="date" class="form-control" id="dateOfStart" name="dateOfStart" [(ngModel)]="editProject.dateOfStart">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="teamSize" class="col-sm-3 col-form-label">Team Size</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="teamSize" name="teamSize" [(ngModel)]="editProject.teamSize">
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="projectID">Project ID</label>
+                        <input type="number" class="form-control" id="projectID" placeholder="Project ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectName">Project Name</label>
+                        <input type="text" class="form-control" id="projectName" placeholder="Project Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfStart">Date Of Start</label>
+                        <input type="date" class="form-control" id="dateOfStart" placeholder="Date of Start">
+                    </div>
+                    <div class="form-group">
+                        <label for="teamSize">Team Size</label>
+                        <input type="number" class="form-control" id="teamSize" placeholder="Team Size">
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onUpdateClick()">Update</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form>
+    <div class="modal fade" id="deleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="deleteProjectModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Delete Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                       <span>Are you sure you want to delete below project?</span>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="projectID" class="col-sm-3 col-form-label">Project ID</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="projectID" name="projectID" [(ngModel)]="deleteProject.projectID" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="projectName" class="col-sm-3 col-form-label">Project Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="projectName" name="projectName" [(ngModel)]="deleteProject.projectName" disabled="disabled">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDeleteConfirmationClick()">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
