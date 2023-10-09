@@ -19,6 +19,7 @@ export class LoginService {
       (user) => {
         if(user){
           this.currentUserName = user.userName;
+          sessionStorage['currentUserDetails'] = JSON.stringify(user);
         }
         return user;
       }
@@ -26,6 +27,7 @@ export class LoginService {
   }
   
   public Logout (){
+    sessionStorage['currentUserDetails'] = null;
     this.currentUserName = null;
   }
 }

@@ -24,11 +24,15 @@ export class ProjectsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.projectService.getAllProjects().subscribe(
-        (response: Projects[]) => {
+      this.projectService.getAllProjects().subscribe({
+        next: (response: Projects[]) => {
           this.projects = response;
+        },
+        error: (error) => {
+          console.log(error);
+          alert("Not Authenticated")
         }
-      )
+      })
       this.searchByItems = Object.keys(new Projects());
       console.log(this.searchByItems);
       console.log(Object.keys(new Projects()))

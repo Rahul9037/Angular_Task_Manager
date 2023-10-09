@@ -1,18 +1,33 @@
 
 <form>
-    <div class="mb-3 row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="staticEmail" name="staticEmail" [(ngModel)]="loginViewModal.UserName">
+  <div class="row">
+    <div class="col-lg-6 mx-auto mt-5">
+      <div class="card text-center">
+        <div class="card-header bg-dark text-white">
+          LOGIN
         </div>
-      </div>
-      <div class="mb-3 row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-          <input type="password" class="form-control" id="inputPassword" name="inputPassword" [(ngModel)]="loginViewModal.Password">
+        <div class="card-body">
+          <div class="mb-3 row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="staticEmail" name="staticEmail" [(ngModel)]="loginViewModal.UserName">
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" name="inputPassword" [(ngModel)]="loginViewModal.Password">
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="mb-3 row">
-        <button type="button" class="btn btn-primary" (click)="login($event)">Login</button>
-      </div>
+        <div class="card-footer text-muted">
+          <!-- <span class="text-red font-weight-bold" *ngIf="loginErroressage && loginErroressage!==''">{{loginErroressage}}</span> -->
+          <p class="fw-bold text-center text-danger" *ngIf="loginErroressage && loginErroressage!==''">{{loginErroressage}}</p>
+          <div class="text-end">            
+            <button type="button" class="btn btn-primary" (click)="login($event)">Login</button>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
 </form>
