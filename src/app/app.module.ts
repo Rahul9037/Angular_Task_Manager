@@ -24,7 +24,7 @@ import { JWTUnAutherizedInterceptorService } from './jwtun-autherized-intercepto
     JwtModule.forRoot({
       config:{
         tokenGetter: () => {
-          return (sessionStorage.getItem('currentUserDetails') ? JSON.parse(sessionStorage.getItem('currentUserDetails') as string)?.token : null)
+          return (sessionStorage.getItem('currentUserDetails') && sessionStorage.getItem('currentUserDetails') !== "null" ? JSON.parse(sessionStorage.getItem('currentUserDetails') as string)?.token : null)
         }
       }
     })

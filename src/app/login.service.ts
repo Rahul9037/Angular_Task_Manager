@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LoginView } from './login-view';
 import { map } from'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class LoginService {
 
   //no need to intercept
   private httpClient: HttpClient | null = null;
-  constructor(private httpBackend: HttpBackend , private jwtHelper: JwtHelperService) { }
+  constructor(private httpBackend: HttpBackend , private jwtHelper: JwtHelperService , private router: Router) { }
 
   public userLogin(authenticate: LoginView):Observable<any>{
     this.httpClient = new HttpClient(this.httpBackend);
@@ -36,6 +37,7 @@ export class LoginService {
   public Logout (){
     sessionStorage['currentUserDetails'] = null;
     this.currentUserName = null;
+    this.router.navigateByUrl("/login")
   }
 
   public isAuthenticated (): boolean{

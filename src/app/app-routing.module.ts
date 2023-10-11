@@ -14,7 +14,9 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [ CanActivateGuardService ]
+    canActivate: [ CanActivateGuardService ] , data :{
+      expectedRole : "Admin"
+    }
   },
   {
     path: 'about',
@@ -23,7 +25,9 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
-    canActivate: [ CanActivateGuardService ]
+    canActivate: [ CanActivateGuardService ] , data :{
+      expectedRole : "Admin"
+    }
   },
   {
     path: '',
