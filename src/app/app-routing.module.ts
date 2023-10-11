@@ -4,6 +4,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AboutComponent } from './admin/about/about.component';
 import { ProjectsComponent } from './admin/projects/projects.component';
 import { LoginComponent } from './login/login.component';
+import { CanActivateGuardService } from './can-activate-guard.service';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [ CanActivateGuardService ]
   },
   {
     path: 'about',
@@ -20,7 +22,8 @@ const routes: Routes = [
   },
   {
     path: 'projects',
-    component: ProjectsComponent
+    component: ProjectsComponent,
+    canActivate: [ CanActivateGuardService ]
   },
   {
     path: '',

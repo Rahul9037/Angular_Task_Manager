@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginView } from './login-view';
 import { map } from'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class LoginService {
 
   //no need to intercept
   private httpClient: HttpClient | null = null;
-  constructor(private httpBackend: HttpBackend) { }
+  constructor(private httpBackend: HttpBackend , private jwtHelper: JwtHelperService) { }
 
   public userLogin(authenticate: LoginView):Observable<any>{
     this.httpClient = new HttpClient(this.httpBackend);
@@ -35,5 +36,14 @@ export class LoginService {
   public Logout (){
     sessionStorage['currentUserDetails'] = null;
     this.currentUserName = null;
+  }
+
+  public isAuthenticated (): boolean{
+    if(this.jwtHelper.isTokenExpired()){
+      return false; //token expired
+    }
+    else{
+      return true; //token valid
+    }
   }
 }

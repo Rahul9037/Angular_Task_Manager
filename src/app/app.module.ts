@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
@@ -21,6 +21,13 @@ import { JWTUnAutherizedInterceptorService } from './jwtun-autherized-intercepto
     HttpClientModule,
     FormsModule,
     AdminModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: () => {
+          return (sessionStorage.getItem('currentUserDetails') ? JSON.parse(sessionStorage.getItem('currentUserDetails') as string)?.token : null)
+        }
+      }
+    })
   ],
   providers: [
      // wirte in order of excdeution of the interceptor
