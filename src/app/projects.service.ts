@@ -16,14 +16,23 @@ export class ProjectsService {
     //return this.httpClient.get<Projects[]>("http://localhost:9090/api/projects", {responseType: 'json'});
 
     //with map
-    let currentUser = { token: ""}
-    let headers = new HttpHeaders();
-    headers = headers.set("Authorization", "Bearer ");
-    if(sessionStorage['currentUserDetails'] !== null){
-      currentUser = JSON.parse(sessionStorage['currentUserDetails']);
-      headers = headers.set("Authorization", "Bearer " + currentUser.token);
-    }
-    return this.httpClient.get<Projects[]>("http://localhost:9090/api/projects", { headers: headers , responseType: 'json'})
+    //with amnual header addition
+    // let currentUser = { token: ""}
+    // let headers = new HttpHeaders();
+    // headers = headers.set("Authorization", "Bearer ");
+    // if(sessionStorage['currentUserDetails'] !== null){
+    //   currentUser = JSON.parse(sessionStorage['currentUserDetails']);
+    //   headers = headers.set("Authorization", "Bearer " + currentUser.token);
+    // }
+    // return this.httpClient.get<Projects[]>("http://localhost:9090/api/projects", { headers: headers , responseType: 'json'})
+    // .pipe(map(
+    //   (data) => {
+    //     return data;
+    //   }
+    // ))
+
+    //qitrh mapand interceptor it will be normal 
+    return this.httpClient.get<Projects[]>("http://localhost:9090/api/projects", { responseType: 'json'})
     .pipe(map(
       (data) => {
         return data;

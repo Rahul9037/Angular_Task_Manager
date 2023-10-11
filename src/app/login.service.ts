@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginView } from './login-view';
@@ -11,9 +11,15 @@ export class LoginService {
 
   currentUserName:any = null;
 
-  constructor(private httpClient: HttpClient) { }
+  //if we need all request to be intercepted
+  // constructor(private httpClient: HttpClient) { }
+
+  //no need to intercept
+  private httpClient: HttpClient | null = null;
+  constructor(private httpBackend: HttpBackend) { }
 
   public userLogin(authenticate: LoginView):Observable<any>{
+    this.httpClient = new HttpClient(this.httpBackend);
     return this.httpClient.post<any>("http://localhost:9090/authenticate" , authenticate, {responseType: 'json'})
     .pipe(map(
       (user) => {

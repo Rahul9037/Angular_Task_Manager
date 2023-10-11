@@ -28,10 +28,11 @@ export class ProjectsComponent implements OnInit{
         next: (response: Projects[]) => {
           this.projects = response;
         },
-        error: (error) => {
-          console.log(error);
-          alert("Not Authenticated")
-        }
+        //this is commented out as we have implemented the error catch using unautherized interceptor
+        // error: (error) => {
+        //   console.log(error);
+        //   alert("Not Authenticated")
+        // }
       })
       this.searchByItems = Object.keys(new Projects());
       console.log(this.searchByItems);
